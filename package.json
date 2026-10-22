@@ -1,0 +1,187 @@
+{
+  "name": "margin-notes",
+  "displayName": "Margin · 边栏笔记",
+  "description": "在原生文本编辑器中阅读小红书与知乎推荐、搜索、正文与评论。",
+  "version": "0.5.3",
+  "publisher": "local-margin",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./out/src/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": false
+  },
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "margin.open",
+        "title": "Margin: 打开（发现 · 推荐）"
+      },
+      {
+        "command": "margin.discover",
+        "title": "Margin: 发现 · 推荐"
+      },
+      {
+        "command": "margin.channels",
+        "title": "Margin: 切换发现栏目"
+      },
+      {
+        "command": "margin.search",
+        "title": "Margin: 搜索当前平台"
+      },
+      {
+        "command": "margin.resume",
+        "title": "Margin: 恢复阅读"
+      },
+      {
+        "command": "margin.hide",
+        "title": "Margin: 收起阅读"
+      },
+      {
+        "command": "margin.login",
+        "title": "Margin: 登录 / 处理验证"
+      },
+      {
+        "command": "margin.finishLogin",
+        "title": "Margin: 完成登录并关闭浏览器"
+      },
+      {
+        "command": "margin.moreComments",
+        "title": "Margin: 加载更多评论"
+      },
+      {
+        "command": "margin.results",
+        "title": "Margin: 返回列表"
+      },
+      {
+        "command": "margin.clearSession",
+        "title": "Margin: 清除登录和阅读会话"
+      },
+      {
+        "command": "margin.refreshNote",
+        "title": "Margin: 刷新当前正文"
+      },
+      {
+        "command": "margin.platform",
+        "title": "Margin: 切换平台（小红书 / 知乎）"
+      },
+      {
+        "command": "margin.sourceResults",
+        "title": "Margin: 返回推荐 / 搜索列表"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "margin.open",
+        "key": "ctrl+alt+m",
+        "mac": "cmd+alt+m"
+      },
+      {
+        "command": "margin.search",
+        "key": "ctrl+alt+;",
+        "mac": "cmd+alt+;"
+      },
+      {
+        "command": "margin.hide",
+        "key": "ctrl+alt+.",
+        "mac": "cmd+alt+."
+      },
+      {
+        "command": "margin.resume",
+        "key": "ctrl+alt+,",
+        "mac": "cmd+alt+,"
+      }
+    ],
+    "configuration": {
+      "title": "Margin",
+      "properties": {
+        "margin.browserPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "可选：本机 Chrome / Edge 可执行文件完整路径。留空自动检测。"
+        },
+        "margin.headless": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "description": "可选：使用无窗口模式（兼容性与风控效果未验证）。默认使用有窗口 Chrome，并尝试最小化。"
+        },
+        "margin.backgroundWindow": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "阅读时尝试最小化专用 Chrome 窗口。启动或新建窗口时仍可能短暂显示；登录/验证窗口不最小化。"
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "margin-text",
+        "aliases": [
+          "Reading Notes"
+        ]
+      }
+    ],
+    "configurationDefaults": {
+      "[margin-text]": {
+        "editor.wordWrap": "on",
+        "editor.lineNumbers": "off",
+        "editor.minimap.enabled": false,
+        "editor.renderWhitespace": "none",
+        "editor.unicodeHighlight.nonBasicASCII": false
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "check": "tsc -p . --noEmit",
+    "test": "npm run compile && node --test --test-concurrency=2 out/test/*.test.js",
+    "package": "npm run compile && vsce package --allow-missing-repository",
+    "vscode:prepublish": "npm run compile",
+    "test:host": "npm run compile && node scripts/test-host.cjs"
+  },
+  "dependencies": {
+    "patchright-core": "1.63.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "1.96.0",
+    "@vscode/test-electron": "^3.1.0",
+    "@vscode/vsce": "4.0.0",
+    "typescript": "5.9.3"
+  },
+  "preview": true,
+  "icon": "assets/icon.png",
+  "keywords": [
+    "小红书",
+    "知乎",
+    "xiaohongshu",
+    "zhihu",
+    "reading",
+    "text-reader"
+  ],
+  "galleryBanner": {
+    "color": "#18212D",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fufgfk/margin-notes.git"
+  },
+  "homepage": "https://github.com/fufgfk/margin-notes#readme",
+  "bugs": {
+    "url": "https://github.com/fufgfk/margin-notes/issues"
+  }
+}
